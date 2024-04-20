@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Layout from "../components/layout/Layout";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserAuth, initialState } from "../redux/slices/userSlice";
+import { onSignInSuccess } from "../redux/slices/sessionSlice";
 import React, { useState, useEffect, useCallback } from "react";
 import { INIT_DATA_LOGIN } from "../util/constants";
 import { useHttpClient } from "../hooks/useHttpClient";
@@ -12,6 +15,7 @@ function Login() {
   const [showLoginForm, setShowLoginForm] = useState(true);
   const { sendRequest } = useHttpClient();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const toggleForm = () => {
     setShowLoginForm(!showLoginForm);
@@ -29,11 +33,19 @@ function Login() {
         method: "POST",
         body: data,
       });
-      if (res) {
-        console.log(res);
-        Cookies.set("token", res.result.token);
-        //Cookies.set("role", res.result.user.role);
-        router.push("/");
+      if (res.success) {
+        dispatch(onSignInSuccess(res.token));
+        dispatch(
+          setUserAuth({
+            firstName: res.user.firstName,
+            lastName: res.user.lastName,
+            userName: res.user.userName,
+            email: res.user.email,
+            role:res.user.role,
+            }
+          )
+        );
+        Cookies.set("token", res.token);      
       } else {
         setShowAlert(true);
       }
