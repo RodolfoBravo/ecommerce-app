@@ -19,7 +19,8 @@ export const useHttpClient = () => {
     const httpAbortController = new AbortController()
     activeHttpRequests.current.push(httpAbortController)
 
-    let fetchUrl = url.startsWith('/') ? `${process.env.ENV_URL}${url}` : url
+    let fetchUrl = 'https://localhost:44370'+url//url.startsWith('/') ? `${process.env.ENV_URL}${url}` : url
+    console.log('fetchUrl', fetchUrl)
     const reqParams = {
       method: reqOptions?.method ?? GET_METHOD,
       signal: httpAbortController.signal,
