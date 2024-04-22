@@ -1,34 +1,45 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Layout from "../components/layout/Layout";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserAuth, initialState } from "../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
+import { setUserAuth } from "../redux/slices/userSlice";
 import { onSignInSuccess } from "../redux/slices/sessionSlice";
 import React, { useState, useEffect, useCallback } from "react";
-import { INIT_DATA_LOGIN } from "../util/constants";
+import { INIT_DATA_LOGIN, INIT_DATA_REGISTER_USER } from "../util/constants";
 import { useHttpClient } from "../hooks/useHttpClient";
 
 function Login() {
-  const [user, setUser] = useState(INIT_DATA_LOGIN);
+  const [userLogin, setUserLogin] = useState(INIT_DATA_LOGIN);
+  const [userRegister, setUserRegister] = useState(INIT_DATA_REGISTER_USER);
   const [error, setError] = useState(INIT_DATA_LOGIN);
-  const [showAlert, setShowAlert] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(true);
-  const { sendRequest } = useHttpClient();
   const router = useRouter();
+  const authState = router.query.authState === "true" ? false : true;
+  const [showAlert, setShowAlert] = useState(false);
+  const [textAlert, setTextAlert] = useState('');
+  const [showLoginForm, setShowLoginForm] = useState(authState);
+  const { sendRequest } = useHttpClient();
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setShowLoginForm(authState);
+  }, [authState]);
 
   const toggleForm = () => {
     setShowLoginForm(!showLoginForm);
   };
 
-  const onHandleChange = ({ target: { name, value } }) => {
-    setUser({ ...user, [name]: value });
+  const onHandLoginleChange = ({ target: { name, value } }) => {
+    setUserLogin({ ...userLogin, [name]: value });
+  };
+
+  const onHandRegisterChange = ({ target: { name, value } }) => {
+    setUserRegister({ ...userRegister, [name]: value });
   };
 
   const loginHandler = async (data) => {
     try {
       const url = "/api/Users/LoginUser";
-
       const res = await sendRequest(url, {
         method: "POST",
         body: data,
@@ -41,16 +52,46 @@ function Login() {
             lastName: res.user.lastName,
             userName: res.user.userName,
             email: res.user.email,
-            role:res.user.role,
-            }
-          )
+            role: res.user.role,
+          })
         );
-        Cookies.set("token", res.token);      
+        router.push("/");
       } else {
         setShowAlert(true);
       }
     } catch (e) {
-      //console.log(e)
+      console.log(e)
+      setTextAlert(e.message);
+      setShowAlert(true);
+    }
+  };
+
+  const registerHandler = async (data) => {
+    try {
+      const url = "/api/Users/RegisterUser";
+      const res = await sendRequest(url, {
+        method: "POST",
+        body: data,
+      });
+      console.log(res);
+      if (res.success) {
+        dispatch(onSignInSuccess(res.token));
+        dispatch(
+          setUserAuth({
+            firstName: res.user.firstName,
+            lastName: res.user.lastName,
+            userName: res.user.userName,
+            email: res.user.email,
+            role: res.user.role,
+          })
+        );
+        router.push("/");
+      } else {
+        setShowAlert(true);
+      }
+    } catch (e) {
+      console.log(e);
+      setTextAlert(e.message);
       setShowAlert(true);
     }
   };
@@ -62,7 +103,11 @@ function Login() {
     //setError(errors);
     //} else {
     //setError(INIT_DATA_LOGIN);
-    loginHandler(user);
+    if (showLoginForm) {
+      loginHandler(userLogin);
+    } else {
+      registerHandler(userRegister);
+    }
     // }
   };
 
@@ -72,6 +117,11 @@ function Login() {
         <section className="pt-50 pb-50 ">
           <div className="container">
             <div className="row ">
+              {showAlert && (
+                <div className="alert alert-danger" role="alert">
+                 {textAlert}
+                </div>
+              )}
               <div className="col-lg-10 m-auto">
                 <div className="row  d-flex justify-content-center align-items-center">
                   {showLoginForm ? (
@@ -88,8 +138,8 @@ function Login() {
                                 required=""
                                 name="email"
                                 placeholder="Correo"
-                                onChange={onHandleChange}
-                                value={user.email}
+                                onChange={onHandLoginleChange}
+                                value={userLogin.email}
                               />
                             </div>
                             <div className="form-group">
@@ -98,8 +148,8 @@ function Login() {
                                 type="password"
                                 name="password"
                                 placeholder="Contraseña"
-                                onChange={onHandleChange}
-                                value={user.password}
+                                onChange={onHandLoginleChange}
+                                value={userLogin.password}
                               />
                             </div>
                             <div className="login_footer form-group">
@@ -154,13 +204,45 @@ function Login() {
                             propósitos descritos en nuestra política de
                             privacidad
                           </p>
-                          <form method="post">
+                          <form onSubmit={onHandleSubmit}>
                             <div className="form-group">
                               <input
                                 type="text"
                                 required=""
-                                name="username"
+                                name="firstName"
+                                placeholder="Nombre"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.firstName}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                required=""
+                                name="lastName"
+                                placeholder="apellido"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.lastName}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                required=""
+                                name="userName"
                                 placeholder="Username"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.userName}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <input
+                                type="date"
+                                required=""
+                                name="birthdate"
+                                placeholder="Fecha de nacimiento"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.birthdate}
                               />
                             </div>
                             <div className="form-group">
@@ -169,6 +251,26 @@ function Login() {
                                 required=""
                                 name="email"
                                 placeholder="Correo"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.email}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                required=""
+                                name="phone"
+                                placeholder="Telefono"
+                                pattern="\d*"
+                                maxlength="10"
+                                value={userRegister.phone}
+                                onChange={(event) => {
+                                  if (!event.target.validity.valid) {
+                                    event.target.value =
+                                      event.target.value.slice(0, -1);
+                                  }
+                                  onHandRegisterChange(event);
+                                }}
                               />
                             </div>
                             <div className="form-group">
@@ -177,14 +279,18 @@ function Login() {
                                 type="password"
                                 name="password"
                                 placeholder="Contraseña"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.password}
                               />
                             </div>
                             <div className="form-group">
                               <input
                                 required=""
                                 type="password"
-                                name="password"
+                                name="verifyPassword"
                                 placeholder="Confirmar Contraseña"
+                                onChange={onHandRegisterChange}
+                                value={userRegister.verifyPassword}
                               />
                             </div>
                             <div className="login_footer form-group">

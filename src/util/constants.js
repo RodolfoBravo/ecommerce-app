@@ -21,15 +21,15 @@ export const INIT_FILTROS_USER_DATA = {
   token: '',
 }
 export const INIT_DATA_REGISTER_USER = {
-  name: '',
-  paternalSurname: '',
-  maternalSurname: '',
+  userName: '',
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
+  phone:'',
   verifyPassword: '',
-  birthDate: '',
-  submenus: '',
-  subadmin: 0,
+  birthdate: '',
+  role:20
 }
 
 export const INIT_DATA_LOGIN = {

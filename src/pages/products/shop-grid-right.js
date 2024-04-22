@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import BrandFilter from "../../components/ecommerce/BrandFilter";
 import CategoryProduct from "../../components/ecommerce/CategoryProduct";
 import CompareModal from "../../components/ecommerce/CompareModal";
@@ -13,12 +13,14 @@ import SizeFilter from "../../components/ecommerce/SizeFilter";
 import SortSelect from "../../components/ecommerce/SortSelect";
 import WishlistModal from "../../components/ecommerce/WishlistModal";
 import Layout from "../../components/layout/Layout";
-import { fetchProduct } from "../../redux/action/product";
+import { fetchProduct } from "../../redux/slices/productSlice";
 import Link from "next/link"
 
-const Products = ({ products, productFilters, fetchProduct }) => {
+const Products = () => {
     // console.log(products);
-
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.products);
+    const productFilters = useSelector((state) => state.productFilters);
     let Router = useRouter(),
         searchTerm = Router.query.search,
         showLimit = 12,
@@ -28,9 +30,11 @@ const Products = ({ products, productFilters, fetchProduct }) => {
     let [limit, setLimit] = useState(showLimit);
     let [pages, setPages] = useState(Math.ceil(products.items.length / limit));
     let [currentPage, setCurrentPage] = useState(1);
+    
 
     useEffect(() => {
-        fetchProduct(searchTerm, "/static/product.json", productFilters);
+        console.log("fetching products", searchTerm, productFilters)
+        dispatch(fetchProduct(searchTerm, "/static/product.json", productFilters));
         cratePagination();
     }, [productFilters, limit, pages, products.items.length]);
 
@@ -288,4 +292,4 @@ const mapDidpatchToProps = {
     fetchProduct,
 };
 
-export default connect(mapStateToProps, mapDidpatchToProps)(Products);
+export default Products;

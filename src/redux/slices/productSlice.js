@@ -6,6 +6,7 @@ export const fetchProduct = createAsyncThunk(
   'product/fetchProduct',
   async ({ searchTerm, url, filters }) => {
     const sendRequest = await fetch(url);
+    console.log('sendRequest', sendRequest);
     const data = await sendRequest.json();
     window.products = data;
     const searchedItems = searchItemsByText(searchTerm, data);
