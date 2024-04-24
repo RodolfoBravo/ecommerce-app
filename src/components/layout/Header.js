@@ -13,7 +13,9 @@ const Header = ({ toggleClick, headerStyle }) => {
   const dispatch = useDispatch();
   const totalCartItems = useSelector((state) => state.cart.length);
   const totalCompareItems = useSelector((state) => state.compare.items.length);
-  const totalWishlistItems = useSelector((state) => state.wishlist.items.length);
+  const totalWishlistItems = useSelector(
+    (state) => state.wishlist.items.length
+  );
   const signedIn = useSelector((state) => state.session.signedIn);
   const userName = useSelector((state) => state.user.userName);
 
@@ -29,7 +31,7 @@ const Header = ({ toggleClick, headerStyle }) => {
   const handleLogout = () => {
     dispatch(onSignOutSuccess());
     dispatch(userLoggedOut());
-    router.push("/");   
+    router.push("/");
   };
 
   const handleToggle = () => setToggled(!isToggled);
@@ -82,7 +84,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                           <Link
                             href={{
                               pathname: "/page-login-register",
-                              query: { authState: 'false' },
+                              query: { authState: "false" },
                             }}
                           >
                             <a>Log In </a>
@@ -90,7 +92,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                           <Link
                             href={{
                               pathname: "/page-login-register",
-                              query: { authState: 'true' },
+                              query: { authState: "true" },
                             }}
                           >
                             <a>/ Registrarse</a>
@@ -196,9 +198,8 @@ const Header = ({ toggleClick, headerStyle }) => {
                 <div className="main-categori-wrap d-none d-lg-block">
                   <a className="categori-button-active" onClick={handleToggle}>
                     <span className="fi-rs-apps"></span>
-                    Browse Categories
+                    Categorías
                   </a>
-
                   <div
                     className={
                       isToggled
@@ -211,7 +212,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-dress"></i>
-                            Women's Clothing
+                            Ropa de Mujer
                           </a>
                         </Link>
                         <div className="dropdown-menu">
@@ -222,62 +223,62 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   <ul>
                                     <li>
                                       <span className="submenu-title">
-                                        Hot & Trending
+                                        Tendencias
                                       </span>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Dresses
+                                          Vestidos
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Blouses & Shirts
+                                          Blusas y Camisas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Hoodies & Sweatshirts
+                                          Sudaderas con Capucha y Sudaderas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Women's Sets
+                                          Conjuntos de Mujer
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Suits & Blazers
+                                          Trajes y Blazers
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Bodysuits
+                                          Body
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Tanks & Camis
+                                          Tanques y Camis
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Coats & Jackets
+                                          Abrigos y Chaquetas
                                         </a>
                                       </Link>
                                     </li>
@@ -287,27 +288,27 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   <ul>
                                     <li>
                                       <span className="submenu-title">
-                                        Bottoms
+                                        Inferiores
                                       </span>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Leggings
+                                          Mallas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Skirts
+                                          Faldas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Shorts
+                                          Pantalones Cortos
                                         </a>
                                       </Link>
                                     </li>
@@ -321,7 +322,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Pants & Capris
+                                          Pantalones y Capris
                                         </a>
                                       </Link>
                                     </li>
@@ -335,14 +336,14 @@ const Header = ({ toggleClick, headerStyle }) => {
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Cover-Ups
+                                          Encubrimientos
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Swimwear
+                                          Trajes de Baño
                                         </a>
                                       </Link>
                                     </li>
@@ -357,10 +358,10 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   alt="menu_banner1"
                                 />
                                 <div className="banne_info">
-                                  <h6>10% Off</h6>
-                                  <h4>New Arrival</h4>
+                                  <h6>10% de Descuento</h6>
+                                  <h4>Nueva Colección</h4>
                                   <Link href="/#">
-                                    <a>Shop now</a>
+                                    <a>Comprar ahora</a>
                                   </Link>
                                 </div>
                               </div>
@@ -370,10 +371,10 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   alt="menu_banner2"
                                 />
                                 <div className="banne_info">
-                                  <h6>15% Off</h6>
-                                  <h4>Hot Deals</h4>
+                                  <h6>15% de Descuento</h6>
+                                  <h4>Ofertas Calientes</h4>
                                   <Link href="/#">
-                                    <a>Shop now</a>
+                                    <a>Comprar ahora</a>
                                   </Link>
                                 </div>
                               </div>
@@ -385,7 +386,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-tshirt"></i>
-                            Men's Clothing
+                            Ropa de Hombre
                           </a>
                         </Link>
                         <div className="dropdown-menu">
@@ -396,20 +397,20 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   <ul>
                                     <li>
                                       <span className="submenu-title">
-                                        Jackets & Coats
+                                        Chaquetas y Abrigos
                                       </span>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Down Jackets
+                                          Chaquetas Acolchadas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Jackets
+                                          Chaquetas
                                         </a>
                                       </Link>
                                     </li>
@@ -423,35 +424,35 @@ const Header = ({ toggleClick, headerStyle }) => {
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Faux Leather Coats
+                                          Abrigos de Cuero Sintético
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Trench
+                                          Gabardinas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Wool & Blends
+                                          Lana y Mezclas
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Vests & Waistcoats
+                                          Chalecos
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Leather Coats
+                                          Abrigos de Cuero
                                         </a>
                                       </Link>
                                     </li>
@@ -461,7 +462,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   <ul>
                                     <li>
                                       <span className="submenu-title">
-                                        Suits & Blazers
+                                        Trajes y Blazers
                                       </span>
                                     </li>
                                     <li>
@@ -474,42 +475,42 @@ const Header = ({ toggleClick, headerStyle }) => {
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Suit Jackets
+                                          Chaquetas de Traje
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Suit Pants
+                                          Pantalones de Traje
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Suits
+                                          Trajes
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Vests
+                                          Chalecos
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Tailor-made Suits
+                                          Trajes a Medida
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Cover-Ups
+                                          Encubrimientos
                                         </a>
                                       </Link>
                                     </li>
@@ -524,10 +525,10 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   alt="menu_banner1"
                                 />
                                 <div className="banne_info">
-                                  <h6>10% Off</h6>
-                                  <h4>New Arrival</h4>
+                                  <h6>10% de Descuento</h6>
+                                  <h4>Nueva Colección</h4>
                                   <Link href="/#">
-                                    <a>Shop now</a>
+                                    <a>Comprar ahora</a>
                                   </Link>
                                 </div>
                               </div>
@@ -539,7 +540,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-smartphone"></i>
-                            Cellphones
+                            Teléfonos Celulares
                           </a>
                         </Link>
                         <div className="dropdown-menu">
@@ -550,13 +551,13 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   <ul>
                                     <li>
                                       <span className="submenu-title">
-                                        Hot & Trending
+                                        Más vendidos
                                       </span>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Cellphones
+                                          Teléfonos Celulares
                                         </a>
                                       </Link>
                                     </li>
@@ -570,35 +571,35 @@ const Header = ({ toggleClick, headerStyle }) => {
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Refurbished Phones
+                                          Teléfonos Reacondicionados
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Mobile Phone
+                                          Teléfono Móvil
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Mobile Phone Parts
+                                          Piezas de Teléfonos Móviles
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Phone Bags & Cases
+                                          Bolsos y Fundas para Teléfonos
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Communication Equipments
+                                          Equipos de Comunicación
                                         </a>
                                       </Link>
                                     </li>
@@ -615,34 +616,34 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   <ul>
                                     <li>
                                       <span className="submenu-title">
-                                        Accessories
+                                        Accesorios
                                       </span>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Screen Protectors
+                                          Protectores de Pantalla
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Wire Chargers
+                                          Cargadores de Cable
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Wireless Chargers
+                                          Cargadores Inalámbricos
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Car Chargers
+                                          Cargadores de Coche
                                         </a>
                                       </Link>
                                     </li>
@@ -656,21 +657,21 @@ const Header = ({ toggleClick, headerStyle }) => {
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Armbands
+                                          Brazaletes
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Dust Plug
+                                          Tapones de Polvo
                                         </a>
                                       </Link>
                                     </li>
                                     <li>
                                       <Link href="/#">
                                         <a className="dropdown-item nav-link nav_item">
-                                          Signal Boosters
+                                          Amplificadores de Señal
                                         </a>
                                       </Link>
                                     </li>
@@ -685,10 +686,10 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   alt="menu_banner1"
                                 />
                                 <div className="banne_info">
-                                  <h6>10% Off</h6>
-                                  <h4>New Arrival</h4>
+                                  <h6>10% de Descuento</h6>
+                                  <h4>Nueva Colección</h4>
                                   <Link href="/#">
-                                    <a>Shop now</a>
+                                    <a>Comprar ahora</a>
                                   </Link>
                                 </div>
                               </div>
@@ -698,10 +699,10 @@ const Header = ({ toggleClick, headerStyle }) => {
                                   alt="menu_banner2"
                                 />
                                 <div className="banne_info">
-                                  <h6>15% Off</h6>
-                                  <h4>Hot Deals</h4>
+                                  <h6>15% de Descuento</h6>
+                                  <h4>Ofertas Calientes</h4>
                                   <Link href="/#">
-                                    <a>Shop now</a>
+                                    <a>Comprar ahora</a>
                                   </Link>
                                 </div>
                               </div>
@@ -713,7 +714,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-desktop"></i>
-                            Computer & Office
+                            Computadoras y Oficina
                           </a>
                         </Link>
                       </li>
@@ -721,7 +722,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-cpu"></i>
-                            Consumer Electronics
+                            Electrónica de Consumo
                           </a>
                         </Link>
                       </li>
@@ -729,7 +730,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-diamond"></i>
-                            Jewelry & Accessories
+                            Joyería y Accesorios
                           </a>
                         </Link>
                       </li>
@@ -737,7 +738,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-home"></i>
-                            Home & Garden
+                            Hogar y Jardín
                           </a>
                         </Link>
                       </li>
@@ -745,7 +746,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-high-heels"></i>
-                            Shoes
+                            Zapatos
                           </a>
                         </Link>
                       </li>
@@ -753,7 +754,7 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-teddy-bear"></i>
-                            Mother & Kids
+                            Mamá y Bebés
                           </a>
                         </Link>
                       </li>
@@ -761,427 +762,66 @@ const Header = ({ toggleClick, headerStyle }) => {
                         <Link href="/products/shop-grid-right">
                           <a>
                             <i className="evara-font-kite"></i>
-                            Outdoor fun
+                            Diversión al Aire Libre
                           </a>
                         </Link>
                       </li>
-                      <li>
-                        <ul
-                          className="more_slide_open"
-                          style={{ display: "none" }}
-                        >
-                          <li>
-                            <Link href="/products/shop-grid-right">
-                              <a>
-                                <i className="evara-font-desktop"></i>
-                                Beauty, Health
-                              </a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-grid-right">
-                              <a>
-                                <i className="evara-font-cpu"></i>
-                                Bags and Shoes
-                              </a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-grid-right">
-                              <a>
-                                <i className="evara-font-diamond"></i>
-                                Consumer Electronics
-                              </a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-grid-right">
-                              <a>
-                                <i className="evara-font-home"></i>
-                                Automobiles & Motorcycles
-                              </a>
-                            </Link>
-                          </li>
-                        </ul>
-                      </li>
                     </ul>
-                    <div className="more_categories">Show more...</div>
                   </div>
                 </div>
+                ;
                 <div className="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                   <nav>
                     <ul>
                       <li>
                         <Link href="/">
-                          <a className="active">
-                            Home
+                          <a>Inicio</a>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/products/shop-grid-right">
+                          <a>
+                            Tienda
                             <i className="fi-rs-angle-down"></i>
                           </a>
                         </Link>
                         <ul className="sub-menu">
                           <li>
-                            <Link href="/">
-                              <a>Home 1</a>
+                            <Link href="/products/">
+                              <a>Productos</a>
                             </Link>
                           </li>
                           <li>
-                            <Link href="/index-2">
-                              <a>Home 2</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/index-3">
-                              <a>Home 3</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/index-4">
-                              <a>Home 4</a>
+                            <Link href="/products/shop-list-right">
+                              <a>Productos Detalles</a>
                             </Link>
                           </li>
                         </ul>
                       </li>
                       <li>
                         <Link href="/page-about">
-                          <a>About</a>
+                          <a>Nosotros</a>
                         </Link>
-                      </li>
-                      <li>
-                        <Link href="/products/shop-grid-right">
-                          <a>
-                            Shop
-                            <i className="fi-rs-angle-down"></i>
-                          </a>
-                        </Link>
-                        <ul className="sub-menu">
-                          <li>
-                            <Link href="/products/shop-grid-right">
-                              <a>Shop Grid – Right Sidebar</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/">
-                              <a>Shop Grid – Left Sidebar</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-list-right">
-                              <a>Shop List – Right Sidebar</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-list-left">
-                              <a>Shop List – Left Sidebar</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-fullwidth">
-                              <a>Shop - Wide</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/products/shop-filter">
-                              <a>Shop - Filter</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/shop-wishlist">
-                              <a>Shop – Wishlist</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/shop-cart">
-                              <a>Shop – Cart</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/shop-checkout">
-                              <a>Shop – Checkout</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/shop-compare">
-                              <a>Shop – Compare</a>
-                            </Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="position-static">
-                        <Link href="/#">
-                          <a>
-                            Mega menu
-                            <i className="fi-rs-angle-down"></i>
-                          </a>
-                        </Link>
-                        <ul className="mega-menu">
-                          <li className="sub-mega-menu sub-mega-menu-width-22">
-                            <Link href="/#">
-                              <a className="menu-title">Women's Fashion</a>
-                            </Link>
-                            <ul>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Dresses</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Blouses & Shirts</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Hoodies & Sweatshirts</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Wedding Dresses</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Prom Dresses</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Cosplay Costumes</a>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="sub-mega-menu sub-mega-menu-width-22">
-                            <Link href="/#">
-                              <a className="menu-title">Men's Fashion</a>
-                            </Link>
-                            <ul>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Jackets</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Casual Faux Leather</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Genuine Leather</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Casual Pants</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Sweatpants</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Harem Pants</a>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="sub-mega-menu sub-mega-menu-width-22">
-                            <Link href="/#">
-                              <a className="menu-title">Technology</a>
-                            </Link>
-                            <ul>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Gaming Laptops</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Ultraslim Laptops</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Tablets</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Laptop Accessories</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/products/shop-grid-right">
-                                  <a>Tablet Accessories</a>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="sub-mega-menu sub-mega-menu-width-34">
-                            <div className="menu-banner-wrap">
-                              <Link href="/products/shop-grid-right">
-                                <a>
-                                  <img
-                                    src="/assets/imgs/banner/menu-banner.jpg"
-                                    alt="Evara"
-                                  />
-                                </a>
-                              </Link>
-                              <div className="menu-banner-content">
-                                <h4>Hot deals</h4>
-                                <h3>
-                                  Don't miss
-                                  <br />
-                                  Trending
-                                </h3>
-                                <div className="menu-banner-price">
-                                  <span className="new-price text-success">
-                                    Save to 50%
-                                  </span>
-                                </div>
-                                <div className="menu-banner-btn">
-                                  <Link href="/products/shop-grid-right">
-                                    <a>Shop now</a>
-                                  </Link>
-                                </div>
-                              </div>
-                              <div className="menu-banner-discount">
-                                <h3>
-                                  <span>35%</span>
-                                  off
-                                </h3>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <Link href="/blog-category-grid">
-                          <a>
-                            Blog
-                            <i className="fi-rs-angle-down"></i>
-                          </a>
-                        </Link>
-                        <ul className="sub-menu">
-                          <li>
-                            <Link href="/blog-category-grid">
-                              <a>Blog Category Grid</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/blog-category-list">
-                              <a>Blog Category List</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/blog-category-big">
-                              <a>Blog Category Big</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/blog-category-fullwidth">
-                              <a>Blog Category Wide</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/#">
-                              <a>
-                                Single Post
-                                <i className="fi-rs-angle-right"></i>
-                              </a>
-                            </Link>
-                            <ul className="level-menu level-menu-modify">
-                              <li>
-                                <Link href="/blog-post-left">
-                                  <a>Left Sidebar</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/blog-post-right">
-                                  <a>Right Sidebar</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link href="/blog-post-fullwidth">
-                                  <a>No Sidebar</a>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <Link href="/#">
-                          <a>
-                            Pages
-                            <i className="fi-rs-angle-down"></i>
-                          </a>
-                        </Link>
-                        <ul className="sub-menu">
-                          <li>
-                            <Link href="/page-about">
-                              <a>About Us</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-contact">
-                              <a>Contact</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-account">
-                              <a>My Account</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-login-register">
-                              <a>login/register</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-purchase-guide">
-                              <a>Purchase Guide</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-privacy-policy">
-                              <a>Privacy Policy</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-terms">
-                              <a>Terms of Service</a>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="/page-404">
-                              <a>404 Page</a>
-                            </Link>
-                          </li>
-                        </ul>
                       </li>
                       <li>
                         <Link href="/page-contact">
-                          <a>Contact</a>
+                          <a>Contacto</a>
                         </Link>
+                      </li>
+                      <li>
+                      <Link href="/page-purchase-guide">
+                              <a>Ayuda</a>
+                            </Link>
+                        <ul className="sub-menu">
+                        </ul>
                       </li>
                     </ul>
                   </nav>
                 </div>
               </div>
-              <div className="hotline d-none d-lg-block">
-                <p>
-                  <i className="fi-rs-headset"></i>
-                  <span>Hotline</span> 1900 - 888
-                </p>
-              </div>
               <p className="mobile-promotion">
-                Happy
-                <span className="text-brand">Mother's Day</span>. Big Sale Up to
-                40%
+                Grandes
+                <span className="text-brand">Ofertas</span>. de hasta el 40%
               </p>
               <div className="header-action-right d-block d-lg-none">
                 <div className="header-action-2">

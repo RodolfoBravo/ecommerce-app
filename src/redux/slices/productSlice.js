@@ -1,60 +1,98 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import filterProductList from '../../util/filterProduct';
-import searchItemsByText from '../../util/searchItemsByText';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import filterProductList from "../../util/filterProduct";
+import searchItemsByText from "../../util/searchItemsByText";
+import * as Types from "../constants/actionTypes";
+
+const initialState = {
+  items: [],
+  filteredList: [],
+};
 
 export const fetchProduct = createAsyncThunk(
-  'product/fetchProduct',
-  async ({ searchTerm, url, filters }) => {
-    const sendRequest = await fetch(url);
-    console.log('sendRequest', sendRequest);
-    const data = await sendRequest.json();
-    window.products = data;
-    const searchedItems = searchItemsByText(searchTerm, data);
-    const filteredList = filterProductList(searchedItems, filters);
-    return filteredList;
+  "products/fetchProduct",
+  async (payload, thunkAPI) => {
+    const { searchTerm, url, filters } = payload;
+    try {
+      console.log("fetchProduct");
+      const sendRequest = await fetch(url);
+      const data = await sendRequest.json();
+      const searchedItems = searchItemsByText(searchTerm, data);
+      const filteredList = filterProductList(searchedItems, filters);
+      console.log("fetchProduct", filteredList);
+      return filteredList;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const fetchMoreProduct = createAsyncThunk(
-  'product/fetchMoreProduct',
-  async (url, total) => {
-    const sendRequest = await fetch(url);
-    const data = await sendRequest.json();
-    return { products: data, total };
+  "products/fetchMoreProduct",
+  async (payload, thunkAPI) => {
+    const { url, total } = payload;
+    try {
+      const sendRequest = await fetch(url);
+      const data = await sendRequest.json();
+      return { products: data, total };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
-const productSlice = createSlice({
-  name: 'product',
-  initialState: { items: [] },
+const productsSlice = createSlice({
+  name: "products",
+  initialState,
   reducers: {
+    fetchedProduct(state, action) {
+      console.log("fetchedProduct");
+      state.filteredList = [...action.payload.products];
+    },
+    fetchedMoreProduct(state, action) {
+      const mergeAllProducts = [...state.items, ...action.payload.products];
+      const limit =
+        action.payload.total && mergeAllProducts.length > action.payload.total
+          ? mergeAllProducts.splice(0, action.payload.total)
+          : mergeAllProducts;
+      state.items = [...limit];
+    },
     addProduct(state, action) {
-      state.items.push(action.payload);
+      state.items = [...state.items, action.payload];
     },
     deleteProduct(state, action) {
-      const index = state.items.findIndex(item => item.id === action.payload.id);
-      state.items.splice(index, 1);
+      deleteProduct(state, action.payload.id);
     },
     updateProduct(state, action) {
-      const index = state.items.findIndex(item => item.id === action.payload.product.id);
+      const index = findProductIndexById(state, action.payload.product.id);
       state.items[index] = action.payload.product;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        state.items = action.payload;
+        console.log("fetchProduct.fulfilled");
+        state.items = [...action.payload];
+      })
+      .addCase(fetchProduct.rejected, (state, action) => {
+        console.log("fetchProduct was rejected", action.error);
       })
       .addCase(fetchMoreProduct.fulfilled, (state, action) => {
         const mergeAllProducts = [...state.items, ...action.payload.products];
-        const limit = action.payload.total && mergeAllProducts.length > action.payload.total
-          ? mergeAllProducts.splice(0, action.payload.total)
-          : mergeAllProducts;
-        state.items = limit;
+        const limit =
+          action.payload.total && mergeAllProducts.length > action.payload.total
+            ? mergeAllProducts.splice(0, action.payload.total)
+            : mergeAllProducts;
+        state.items = [...limit];
       });
   },
 });
 
-export const { addProduct, deleteProduct, updateProduct } = productSlice.actions;
+export const {
+  fetchedProduct,
+  fetchedMoreProduct,
+  addProduct,
+  deleteProduct,
+  updateProduct,
+} = productsSlice.actions;
 
-export default productSlice.reducer;
+export default productsSlice.reducer;
